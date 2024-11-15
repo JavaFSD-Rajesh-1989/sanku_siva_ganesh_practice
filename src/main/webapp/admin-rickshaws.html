@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Manage Rickshaws</title>
+</head>
+<body>
+    <h1>Rickshaw Management</h1>
+
+    <!-- Add Rickshaw Form -->
+    <form action="/api/admin/rickshaw" method="post">
+        <input type="text" name="location" placeholder="Location" required>
+        <input type="text" name="vehicleType" placeholder="Vehicle Type (Standard/Deluxe)" required>
+        <input type="number" name="fare" placeholder="Fare" required>
+        <input type="number" name="rating" placeholder="Rating">
+        <input type="checkbox" name="available"> Available
+        <button type="submit">Add Rickshaw</button>
+    </form>
+
+    <!-- Rickshaw List -->
+    <h2>Rickshaw Fleet</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Location</th>
+                <th>Type</th>
+                <th>Fare</th>
+                <th>Rating</th>
+                <th>Available</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody th:each="rickshaw : ${rickshaws}">
+            <tr>
+                <td th:text="${rickshaw.id}"></td>
+                <td th:text="${rickshaw.location}"></td>
+                <td th:text="${rickshaw.vehicleType}"></td>
+                <td th:text="${rickshaw.fare}"></td>
+                <td th:text="${rickshaw.rating}"></td>
+                <td th:text="${rickshaw.available ? 'Yes' : 'No'}"></td>
+                <td>
+                    <button th:onclick="'/api/admin/rickshaw/' + ${rickshaw.id}">Edit</button>
+                    <button th:onclick="'/api/admin/rickshaw/' + ${rickshaw.id}" method="delete">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

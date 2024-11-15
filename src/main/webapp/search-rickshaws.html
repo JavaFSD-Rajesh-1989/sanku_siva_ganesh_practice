@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Search Rickshaws</title>
+</head>
+<body>
+    <form action="/api/rickshaws/search" method="get">
+        <input type="text" name="location" placeholder="Location" required>
+        <input type="number" name="minFare" placeholder="Min Fare">
+        <input type="number" name="maxFare" placeholder="Max Fare">
+        <button type="submit">Search</button>
+    </form>
+
+    <div th:if="${rickshaws != null}">
+        <h2>Available Rickshaws</h2>
+        <ul>
+            <li th:each="rickshaw : ${rickshaws}">
+                <span th:text="${rickshaw.vehicleType}">Type</span> -
+                <span th:text="${rickshaw.fare}">Fare</span> -
+                <span th:text="${rickshaw.rating}">Rating</span>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
